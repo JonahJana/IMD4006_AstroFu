@@ -21,7 +21,7 @@ public class moveScript : MonoBehaviour
     {
         ball = GetComponent<Rigidbody2D>();
 
-        
+        moveSpeed = 2;
     }
 
     // Update is called once per frame
@@ -32,46 +32,12 @@ public class moveScript : MonoBehaviour
         ballAngle = ball.rotation;
         ball.MoveRotation(ballAngle + rotationSpeed * tracker * Time.fixedDeltaTime);
 
-        if(ballAngle > 360){
-            ballAngle -= 360;
-        }else if(ballAngle < 0){
-            ballAngle += 360;
-        }
+        angularVelocity.x = 1;
+        angularVelocity.y = 0;
 
-// velocity
-        if(ballAngle == 0){
-            angularVelocity.x = moveSpeed;
-            angularVelocity.y = 0;
-        }
-        if(ballAngle < 90){
 
-        }
-        if(ballAngle == 90){
-            angularVelocity.x = 0;
-            angularVelocity.y = moveSpeed;
-        }
-        if(ballAngle < 180 && ballAngle > 90){
-            
-        }
-        if(ballAngle == 180){
-            angularVelocity.x = -1 * moveSpeed;
-            angularVelocity.y = 0;
-        }
-        if(ballAngle < 270 && ballAngle > 180){
-            
-        }
-        if(ballAngle == 270){
-            angularVelocity.x = 0;
-            angularVelocity.y = -1 * moveSpeed;
-        }
-        if(ballAngle < 360 && ballAngle > 270){
-            
-        }
-        if(ballAngle == 360){
-            angularVelocity.x = moveSpeed;
-            angularVelocity.y = 0;
-        }
+        ball.AddRelativeForce(angularVelocity * moveSpeed, ForceMode2D.Force);
 
-        ball.velocity = angularVelocity;
+        //ball.MovePosition((Vector2)transform.position + ((Vector2)transform.forward * moveSpeed));
     }
 }
