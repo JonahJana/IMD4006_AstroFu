@@ -8,15 +8,12 @@ public class moveScript : MonoBehaviour
 
     public float moveSpeed;
     public float rotationSpeed;
-    public float jumpHeight;
     public Rigidbody2D ball;
 
     public float ballAngle;
 
     public Vector2 angularVelocity;
-
-    public float tracker;
-
+    
     public bool isP1Punch;
 
 
@@ -24,8 +21,7 @@ public class moveScript : MonoBehaviour
     void Start()
     {
         ball = GetComponent<Rigidbody2D>();
-
-        moveSpeed = 2;
+        
     }
 
     // Update is called once per frame
@@ -41,8 +37,10 @@ public class moveScript : MonoBehaviour
         //Player One
         if (Input.GetKey(KeyCode.A))
         {
-            float rotateUp = 1;
-            ball.MoveRotation(ballAngle + rotationSpeed * rotateUp * Time.fixedDeltaTime);
+            float rotateUp = 1 * rotationSpeed;
+            //ball.MoveRotation(ballAngle + rotationSpeed * rotateUp * Time.fixedDeltaTime);
+
+            ball.AddTorque(rotateUp, ForceMode2D.Force);
         }
         if (Input.GetKey(KeyCode.S))
         {
@@ -57,23 +55,13 @@ public class moveScript : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.D))
         {
-            float rotateDown = -1;
-            ball.MoveRotation(ballAngle + rotationSpeed * rotateDown * Time.fixedDeltaTime);
+            float rotateDown = -1 * rotationSpeed;
+            //ball.MoveRotation(ballAngle + rotationSpeed * rotateDown * Time.fixedDeltaTime);
+
+            ball.AddTorque(rotateDown, ForceMode2D.Force);
         }
 
-        //Player Two
-        if (Input.GetKey(KeyCode.J))
-        {
-
-        }
-        if (Input.GetKey(KeyCode.K))
-        {
-
-        }
-        if (Input.GetKey(KeyCode.L))
-        {
-
-        }
+       
 
 
 
