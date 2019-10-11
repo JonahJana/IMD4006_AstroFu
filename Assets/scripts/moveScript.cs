@@ -108,33 +108,6 @@ public class moveScript : MonoBehaviour
                 animator.SetBool("IsAttacking", isP1Punch);
             }
         }
-        
-
-        
-
-       
-
-
-
-        //Quit
-        if (Input.GetKey(KeyCode.Escape))
-        {
-
-        }
-
-        //Restart
-        if (Input.GetKey(KeyCode.R) || Input.GetKey(KeyCode.Space))
-        {
-
-        }
-
-        /*
-        //Start Game
-        if (Input.anyKeyDown)
-        {
-
-        }
-        */
     }
 
     private void OnTriggerEnter(Collider other)
