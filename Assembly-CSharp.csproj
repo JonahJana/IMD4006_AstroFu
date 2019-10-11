@@ -60,8 +60,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\moveScript.cs" />
-    <Compile Include="Assets\p2Move.cs" />
+    <Compile Include="Assets\scripts\gameHandler.cs" />
+    <Compile Include="Assets\scripts\HealthBar.cs" />
+    <Compile Include="Assets\scripts\healthHandler.cs" />
+    <Compile Include="Assets\scripts\moveScript.cs" />
+    <Compile Include="Assets\scripts\p2Move.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Admin/Desktop/IMD4006 Games/IMD4006_AstroFu/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
