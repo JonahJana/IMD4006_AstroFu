@@ -48,6 +48,7 @@ public class moveScript : MonoBehaviour
     void Update()
     {
         p1HealthBox.text = p1Health.ToString();
+        Debug.Log(p1HealthBox.text);
 
         if (p1Health <= 0)
         {
