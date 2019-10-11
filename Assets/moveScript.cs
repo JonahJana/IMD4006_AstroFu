@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System.Threading;
 
 public class moveScript : MonoBehaviour
 {
     public Animator animator;
 
     public float moveSpeed;
+
+    public float boost;
+
     public float rotationSpeed;
     public Rigidbody2D ball;
 
@@ -16,12 +21,23 @@ public class moveScript : MonoBehaviour
     
     public bool isP1Punch;
 
+    public bool isPunching;
+
+    public float punchLength = 2;
+    public float punchTimer = 4;
+
+    private float whenCanPunch;
+    private float punchDuration;
+
 
     // Start is called before the first frame update
     void Start()
     {
         ball = GetComponent<Rigidbody2D>();
-        
+
+        isPunching = false;
+
+        whenCanPunch = Time.time;
     }
 
     // Update is called once per frame
@@ -30,29 +46,19 @@ public class moveScript : MonoBehaviour
         ballAngle = ball.rotation;
         
 
-        angularVelocity.x = 1;
+        angularVelocity.x = 1 * boost;
         angularVelocity.y = 0;
+        
         
 
         //Player One
         if (Input.GetKey(KeyCode.A))
         {
             float rotateUp = 1 * rotationSpeed;
-            //ball.MoveRotation(ballAngle + rotationSpeed * rotateUp * Time.fixedDeltaTime);
-
+            
             ball.AddTorque(rotateUp, ForceMode2D.Force);
         }
-        if (Input.GetKey(KeyCode.S))
-        {
-            //Player One Punch
-            isP1Punch = true;
-            animator.SetBool("IsAttacking", isP1Punch);
-        }
-        if (Input.GetKeyUp(KeyCode.S))
-        {
-            isP1Punch = false;
-            animator.SetBool("IsAttacking", isP1Punch);
-        }
+
         if (Input.GetKey(KeyCode.D))
         {
             float rotateDown = -1 * rotationSpeed;
@@ -61,11 +67,50 @@ public class moveScript : MonoBehaviour
             ball.AddTorque(rotateDown, ForceMode2D.Force);
         }
 
+
+        if (Time.time > whenCanPunch)
+        {
+            Debug.Log("able to punch");
+            //starting the punch
+            if(Input.GetKeyDown(KeyCode.S))
+            {
+                Debug.Log("starting to punch");
+                isPunching = true;
+                punchDuration = Time.time + punchLength;
+            }
+
+            // during the punch
+            if (Input.GetKey(KeyCode.S) && isPunching && Time.time < punchDuration)
+            {
+                Debug.Log("punching");
+                //Player One Punch
+                isP1Punch = true;
+                animator.SetBool("IsAttacking", isP1Punch);
+
+                ball.AddRelativeForce(angularVelocity, ForceMode2D.Force);
+            }
+            
+
+            // stop punching
+            if (Input.GetKeyUp(KeyCode.S))
+            {
+                Debug.Log("stop");
+
+                whenCanPunch = Time.time + punchTimer;
+                isPunching = false;
+                punchDuration = Time.time - 1;
+
+                isP1Punch = false;
+                animator.SetBool("IsAttacking", isP1Punch);
+            }
+        }
+        
+
+        
+
        
 
 
-
-        ball.AddRelativeForce(angularVelocity * moveSpeed, ForceMode2D.Force);
 
         //Quit
         if (Input.GetKey(KeyCode.Escape))
