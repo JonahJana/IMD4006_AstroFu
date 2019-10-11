@@ -4537,12 +4537,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   p2animator: {fileID: 0}
   p2moveSpeed: 4
+  p2Boost: 10
   p2rotationSpeed: 1.5
   p2Ball: {fileID: 1118805478}
   p2BallAngle: 0
   p2angularVelocity: {x: 0, y: 0}
   isp2Punch: 0
-  torque: 0
+  isp2Punching: 0
+  p2punchLength: 2
+  p2punchTimer: 4
 --- !u!1 &1121543630
 GameObject:
   m_ObjectHideFlags: 0

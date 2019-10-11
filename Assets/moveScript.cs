@@ -7,12 +7,10 @@ using System.Threading;
 public class moveScript : MonoBehaviour
 {
     public Animator animator;
-
     public float moveSpeed;
-
     public float boost;
-
     public float rotationSpeed;
+
     public Rigidbody2D ball;
 
     public float ballAngle;
@@ -20,7 +18,6 @@ public class moveScript : MonoBehaviour
     public Vector2 angularVelocity;
     
     public bool isP1Punch;
-
     public bool isPunching;
 
     public float punchLength = 2;
@@ -51,14 +48,13 @@ public class moveScript : MonoBehaviour
         
         
 
-        //Player One
+        //rotations
         if (Input.GetKey(KeyCode.A))
         {
             float rotateUp = 1 * rotationSpeed;
             
             ball.AddTorque(rotateUp, ForceMode2D.Force);
         }
-
         if (Input.GetKey(KeyCode.D))
         {
             float rotateDown = -1 * rotationSpeed;
@@ -70,11 +66,9 @@ public class moveScript : MonoBehaviour
 
         if (Time.time > whenCanPunch)
         {
-            Debug.Log("able to punch");
             //starting the punch
             if(Input.GetKeyDown(KeyCode.S))
             {
-                Debug.Log("starting to punch");
                 isPunching = true;
                 punchDuration = Time.time + punchLength;
             }
@@ -82,20 +76,17 @@ public class moveScript : MonoBehaviour
             // during the punch
             if (Input.GetKey(KeyCode.S) && isPunching && Time.time < punchDuration)
             {
-                Debug.Log("punching");
-                //Player One Punch
-                isP1Punch = true;
+                //animator
                 animator.SetBool("IsAttacking", isP1Punch);
 
+                //Player One Punch
+                isP1Punch = true;
                 ball.AddRelativeForce(angularVelocity, ForceMode2D.Force);
-            }
-            
+            }            
 
             // stop punching
-            if (Input.GetKeyUp(KeyCode.S))
+            if (Input.GetKeyUp(KeyCode.S) && isPunching)
             {
-                Debug.Log("stop");
-
                 whenCanPunch = Time.time + punchTimer;
                 isPunching = false;
                 punchDuration = Time.time - 1;
