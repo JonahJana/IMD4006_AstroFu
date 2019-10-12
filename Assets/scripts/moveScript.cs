@@ -48,11 +48,10 @@ public class moveScript : MonoBehaviour
     void Update()
     {
         p1HealthBox.text = p1Health.ToString();
-        Debug.Log(p1HealthBox.text);
 
         if (p1Health <= 0)
         {
-
+            // p2 wins
         }
 
         ballAngle = ball.rotation;
@@ -72,7 +71,6 @@ public class moveScript : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             float rotateDown = -1 * rotationSpeed;
-            //ball.MoveRotation(ballAngle + rotationSpeed * rotateDown * Time.fixedDeltaTime);
 
             ball.AddTorque(rotateDown, ForceMode2D.Force);
         }
@@ -111,9 +109,12 @@ public class moveScript : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D collider)
     {
-        other.GetComponent<p2Move>().p2Health--;
+        if (collider.gameObject.name.Equals("astroDude_2"))
+        {
+            collider.GetComponent<p2Move>().p2Health--;            
+        }
     }
 
 }

@@ -52,8 +52,8 @@ public class p2Move : MonoBehaviour
         {
 
         }
-        p2BallAngle = p2Ball.rotation;
 
+        p2BallAngle = p2Ball.rotation;
 
         p2angularVelocity.x = -1 * p2Boost;
         p2angularVelocity.y = 0;
@@ -107,9 +107,12 @@ public class p2Move : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D collider)
     {
-        other.GetComponent<moveScript>().p1Health--;
+        if (collider.gameObject.name.Equals("astroDude_1"))
+        {
+            collider.GetComponent<moveScript>().p1Health--;
+        }
     }
 
 }
