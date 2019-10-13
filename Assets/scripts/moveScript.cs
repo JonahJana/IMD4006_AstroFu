@@ -49,16 +49,10 @@ public class moveScript : MonoBehaviour
     {
         p1HealthBox.text = p1Health.ToString();
 
-        if (p1Health <= 0)
-        {
-            // p2 wins
-        }
-
         ballAngle = ball.rotation;
         
         angularVelocity.x = 1 * boost;
-        angularVelocity.y = 0;
-        
+        angularVelocity.y = 0;        
         
 
         //rotations
@@ -75,7 +69,7 @@ public class moveScript : MonoBehaviour
             ball.AddTorque(rotateDown, ForceMode2D.Force);
         }
 
-
+        // punching
         if (Time.time > whenCanPunch)
         {
             //starting the punch
@@ -113,7 +107,17 @@ public class moveScript : MonoBehaviour
     {
         if (collider.gameObject.name.Equals("astroDude_2"))
         {
-            collider.GetComponent<p2Move>().p2Health--;            
+            Debug.Log("p2 hit!");
+            collider.GetComponent<p2Move>().p2Health--;
+
+            int p2HealthCheck = collider.GetComponent<p2Move>().p2Health;
+            // check for no health;
+            if (p2HealthCheck <= 0)
+            {
+                //p1 wins
+                //end the game
+
+            }
         }
     }
 

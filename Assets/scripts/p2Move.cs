@@ -95,14 +95,13 @@ public class p2Move : MonoBehaviour
             // stop punching
             if (Input.GetKeyUp(KeyCode.K) && isp2Punching)
             {
-                Debug.Log("stop");
-
                 p2whenCanPunch = Time.time + p2punchTimer;
                 isp2Punching = false;
                 p2punchDuration = Time.time - 1;
 
                 isp2Punch = false;
                 //animation
+
             }
         }
     }
@@ -111,7 +110,16 @@ public class p2Move : MonoBehaviour
     {
         if (collider.gameObject.name.Equals("astroDude_1"))
         {
+            Debug.Log("p1 hit!");
             collider.GetComponent<moveScript>().p1Health--;
+
+            int p1HealthCheck = collider.GetComponent<moveScript>().p1Health;
+            // check for no health;
+            if (p1HealthCheck <= 0)
+            {
+                //p2 wins
+                //end the game
+            }
         }
     }
 
