@@ -42,19 +42,19 @@ public class moveScript : MonoBehaviour
         whenCanPunch = Time.time;
 
         p1Health = 10;
+
+        angularVelocity.x = 1 * boost;
+        angularVelocity.y = 0;
+
+        ball.AddRelativeForce(angularVelocity * 10, ForceMode2D.Force);
     }
 
     // Update is called once per frame
     void Update()
     {
         p1HealthBox.text = p1Health.ToString();
-
         ballAngle = ball.rotation;
-        
-        angularVelocity.x = 1 * boost;
-        angularVelocity.y = 0;        
-        
-
+  
         //rotations
         if (Input.GetKey(KeyCode.A))
         {
@@ -111,6 +111,9 @@ public class moveScript : MonoBehaviour
             collider.GetComponent<p2Move>().p2Health--;
 
             int p2HealthCheck = collider.GetComponent<p2Move>().p2Health;
+
+            Debug.Log("p2H: " + p2HealthCheck);
+
             // check for no health;
             if (p2HealthCheck <= 0)
             {

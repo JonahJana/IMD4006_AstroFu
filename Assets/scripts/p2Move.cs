@@ -41,22 +41,18 @@ public class p2Move : MonoBehaviour
         p2whenCanPunch = Time.time;
 
         p2Health = 10;
+
+        p2angularVelocity.x = -1 * p2Boost;
+        p2angularVelocity.y = 0;
+
+        p2Ball.AddRelativeForce(p2angularVelocity * 10, ForceMode2D.Force);
     }
 
     // Update is called once per frame
     void Update()
     {
         p2HealthBox.text = p2Health.ToString();
-
-        if (p2Health <= 0)
-        {
-
-        }
-
         p2BallAngle = p2Ball.rotation;
-
-        p2angularVelocity.x = -1 * p2Boost;
-        p2angularVelocity.y = 0;
 
         //rotations
         if (Input.GetKey(KeyCode.J))
@@ -114,6 +110,8 @@ public class p2Move : MonoBehaviour
             collider.GetComponent<moveScript>().p1Health--;
 
             int p1HealthCheck = collider.GetComponent<moveScript>().p1Health;
+
+            Debug.Log("p1H: " + p1HealthCheck);
             // check for no health;
             if (p1HealthCheck <= 0)
             {

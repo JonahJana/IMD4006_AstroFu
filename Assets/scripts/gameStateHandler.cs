@@ -13,8 +13,8 @@ public class gameStateHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startMenuPanel.SetActive(true);
-        gamePlayPanel.SetActive(false);
+        startMenuPanel.SetActive(false);
+        gamePlayPanel.SetActive(true);
         gameOverPanel.SetActive(false);
     }
 
